@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>mk days</title>
-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
   </head>
   <body>
     <div class="page">
@@ -16,7 +16,7 @@
         {% endif %}
       </div>
       {% for message in get_flashed_messages() %}
-      <div class=flash>{{ message }}</div>
+      <div class="flash">{{ message }}</div>
       {% endfor %}
       {% block body %}{% endblock %}
     </div>
