@@ -5,6 +5,7 @@
 <p>{{ entry.text|safe }}</p>
 {% endif %}
 
-<p><a href="{{ url_for('show_entries') }}">Go back</a></p>
+<a href="{{ url_for('show_entries') }}">Go back</a>
+<a href="/entries/{{ entry.entry_id }}/edit">Edit</a>
 {% endblock %}
 
