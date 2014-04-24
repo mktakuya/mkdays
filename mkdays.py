@@ -41,6 +41,24 @@ def show_detail(entry_id):
     entry = dict(entry_id=row[0], title=row[1], text=row[2])
     return render_template('show_detail.html', entry=entry)
 
+@app.route('/entries/<int:entry_id>/edit')
+def edit_entry(entry_id):
+    cur = g.db.execute("select id, title, text from entries where id=?", str(entry_id))
+    row = cur.fetchone()
+    entry = dict(entry_id=row[0], title=row[1], text=row[2])
+    return render_template('edit_entry.html', entry=entry)
+
+@app.route('/entries/<int:entry_id>/update', methods=['POST'])
+def update_entry(entry_id):
+    if request.method == 'POST':
+        cur = g.db.execute("update entries set title = ?, text = ? where id = ?",
+                (request.form['title'], request.form['text'], entry_id))
+        g.db.commit()
+        flash('Entry was successfully edited')
+        return redirect(url_for('show_entries'))
+    else:
+        return redirect(url_for('show_entries'))
+
 @app.route('/add', methods=['POST'])
 def add_entry():
     if not session.get('logged_in'):
