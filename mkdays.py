@@ -59,6 +59,16 @@ def update_entry(entry_id):
     else:
         return redirect(url_for('show_entries'))
 
+@app.route('/entries/<int:entry_id>/delete')
+def delete_entry(entry_id):
+    if not session.get('logged_in'):
+        abort(401)
+    g.db.execute('delete from entries where id=?', str(entry_id))
+    g.db.commit()
+    flash('Entry was successfully deleted')
+    return redirect(url_for('show_entries'))
+    
+
 @app.route('/add', methods=['POST'])
 def add_entry():
     if not session.get('logged_in'):

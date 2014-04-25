@@ -1,15 +1,16 @@
 {% extends "layout.html" %}
 {% block body %}
-{% if session.logged_in %}
 <dl>
   <dt>Title:
   <dd>{{ entry.title }}
   <dt>Text:
   <dd>{{ entry.text|safe }}
 </dl>
-{% endif %}
 
 <a href="{{ url_for('show_entries') }}">Go back</a>
+{% if session.logged_in %}
 <a href="/entries/{{ entry.entry_id }}/edit">Edit</a>
+<a href="/entries/{{ entry.entry_id }}/delete">Delete</a>
+{% endif %}
 {% endblock %}
 
