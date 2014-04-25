@@ -31,7 +31,7 @@ def after_request(response):
 @app.route('/')
 def show_entries():
     cur = g.db.execute('select id, title, text from entries order by id desc')
-    entries = [dict(entry_id=row[0], title=row[1], text=row[2]) for row in cur.fetchall()]
+    entries = [dict(entry_id=row[0], title=row[1], text=row[2]) for row in cur.fetchall()][:3]
     return render_template('show_entries.html', entries=entries)
 
 @app.route('/entries/<int:entry_id>')
